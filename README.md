@@ -3,7 +3,7 @@
 ## General rules
 - Technologies to use: Pixi.js, TweenMax, JS
 - No external framework should be used
-- Use git to document show how your code is evolving
+- Use git to document how your code is evolving
 
 ## Project initial run
   ```bash
