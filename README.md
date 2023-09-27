@@ -38,7 +38,7 @@ Create bonus diamonds worth 10 points. Animate the bonus diamonds so players can
 
 ### Deploy game
 
-Build and deploy game to any environment that will allow it to be reviewed.
+Build and deploy game to any environment that will allow it to be reviewed. GitHub is a fine option.
 
 ## Project build
   ```bash
