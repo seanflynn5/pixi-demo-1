@@ -13,7 +13,7 @@
 
 ## Deliverable
 
-A revised jumping game that includes one additional animation element and a leaderboard of top 10 scores. 
+A revised jumping game that includes at least one additional animation element and a leaderboard of top 10 scores. 
 
 
 ## Game Specification
@@ -32,6 +32,10 @@ You will create a simple animation that can be used once the player reaches the 
 
 Create a leaderboard using any layout you would like. Within the leaderboard, have a list of 10 ficticious players with their scores. As the current player's score increases, have them move upward within the leaderboard. Show an animation when they top the leaderboard.
 
+### Bonus assignments (optional)
+
+Create bonus diamonds worth 10 points. Animate the bonus diamonds so players can distinguish them from the standard diamonds.
+
 ### Deploy game
 
 Build and deploy game to any environment that will allow it to be reviewed.
@@ -40,6 +44,5 @@ Build and deploy game to any environment that will allow it to be reviewed.
   ```bash
   npm run build
   ```
-
 This command creates the build for production and saves the created build's files in the dist/ folder.
 
