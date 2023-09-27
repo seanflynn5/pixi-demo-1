@@ -32,7 +32,7 @@ You will create a simple animation that can be used once the player reaches the 
 
 Create a leaderboard using any layout you would like. Within the leaderboard, have a list of 10 ficticious players with their scores. As the current player's score increases, have them move upward within the leaderboard. Show an animation when they top the leaderboard.
 
-### Bonus assignments (optional)
+### Bonus assignment (optional)
 
 Create bonus diamonds worth 10 points. Animate the bonus diamonds so players can distinguish them from the standard diamonds.
 
