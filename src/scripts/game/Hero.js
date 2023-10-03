@@ -1,6 +1,7 @@
 import * as Matter from 'matter-js';
 import * as PIXI from "pixi.js";
 import { App } from '../system/App';
+import Scores from "../system/Scores.json";
 
 export class Hero {
     constructor() {
@@ -12,6 +13,14 @@ export class Hero {
         this.maxJumps = App.config.hero.maxJumps;
         this.jumpIndex = 0;
         this.score = 0;
+        this.name = '';
+    }
+
+    assignName() {
+        const keys = Object.keys(Scores);
+        const randomIndex = Math.floor(Math.random() * keys.length);
+        this.name = keys[randomIndex];
+
     }
 
     collectDiamond(diamond) {
@@ -67,6 +76,7 @@ export class Hero {
         this.sprite.animationSpeed = 0.1;
         this.sprite.play();
     }
+
 
     destroy() {
         App.app.ticker.remove(this.update, this);

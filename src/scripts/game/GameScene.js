@@ -5,6 +5,8 @@ import { Background } from "./Background";
 import { Scene } from '../system/Scene';
 import { Hero } from "./Hero";
 import { Platforms } from "./Platforms";
+import { Leaderboard } from "./Leaderboard";
+import Scores from "../system/Scores.json";
 
 export class GameScene extends Scene {
     create() {
@@ -12,6 +14,7 @@ export class GameScene extends Scene {
         this.createHero();
         this.createPlatforms();
         this.setEvents();
+        this.showLeaderboard();
         //[13]
         this.createUI();
         //[/13]
@@ -49,6 +52,8 @@ export class GameScene extends Scene {
     createHero() {
         this.hero = new Hero();
         this.container.addChild(this.hero.sprite);
+        this.hero.assignName();
+        console.log(this.hero.name)
 
         this.container.interactive = true;
         this.container.on("pointerdown", () => {
@@ -56,9 +61,24 @@ export class GameScene extends Scene {
         });
         // [14]
         this.hero.sprite.once("die", () => {
+            Scores[this.hero.name] = this.hero.score;
+            const sortedScores = Object.entries(Scores).sort(([, scoreA], [, scoreB]) => scoreB - scoreA); 
+            // if (this.hero.name === sortedScores[0][0]) {
+            //     this.hero.createFireworksExplosion(400, 300);
+            // }
             App.scenes.start("Game");
         });
         // [/14]
+    }
+
+    showLeaderboard() {
+        console.log('getting invoked in showLeaderboard')
+        this.leaderboard = new Leaderboard();
+        this.container.addChild(this.leaderboard.container)
+        this.leaderboard.show()
+        this.container.on("pointerdown", () => {
+            this.leaderboard.hide();
+        });
     }
 
     createBackground() {
