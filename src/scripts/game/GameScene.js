@@ -63,22 +63,19 @@ export class GameScene extends Scene {
         this.hero.sprite.once("die", () => {
             Scores[this.hero.name] = this.hero.score;
             const sortedScores = Object.entries(Scores).sort(([, scoreA], [, scoreB]) => scoreB - scoreA); 
-            // if (this.hero.name === sortedScores[0][0]) {
-            //     this.hero.createFireworksExplosion(400, 300);
-            // }
+            if (this.hero.name === sortedScores[0][0]) {
+                this.hero.startFireworksAnimation();
+                this.hero.showNewHighScoreMessage();
+            }
             App.scenes.start("Game");
         });
         // [/14]
     }
 
     showLeaderboard() {
-        console.log('getting invoked in showLeaderboard')
         this.leaderboard = new Leaderboard();
         this.container.addChild(this.leaderboard.container)
         this.leaderboard.show()
-        this.container.on("pointerdown", () => {
-            this.leaderboard.hide();
-        });
     }
 
     createBackground() {
