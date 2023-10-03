@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import { App } from "../system/App";
-import Scores from "../system/Scores.json"; // Import the JSON data
+import Scores from "../system/Scores.json"; // Import the scoreboard JSON data
 
 export class Leaderboard {
     constructor() {
@@ -11,7 +11,7 @@ export class Leaderboard {
         const entryStyle = {
             fontFamily: 'Verdana',
             fontSize: 18,
-            fill: 0xFFFFFF,
+            fill: 0xFF6229,
         };
 
         // Sort scores in descending order
@@ -21,12 +21,12 @@ export class Leaderboard {
         // Create and add leaderboard entries
         const entryCount = Math.min(sortedScores.length, 10);
         const entryHeight = 30;
-        const leaderboardWidth = 200; // Width of the leaderboard
-        const leaderboardX = window.innerWidth - leaderboardWidth - 10; // Adjust the position accordingly
+        const leaderboardWidth = 170; 
+        const leaderboardX = window.innerWidth - leaderboardWidth - 10;
 
         // Create a background for the leaderboard
         const background = new PIXI.Graphics();
-        background.beginFill(0xFF7F50, 0.9); // Adjust the alpha value for transparency
+        background.beginFill(0xFFFFFF, 0.7);
         background.drawRect(0, 0, leaderboardWidth, entryCount * entryHeight);
         background.endFill();
         this.container.addChild(background);

@@ -1,5 +1,4 @@
 import * as Matter from 'matter-js';
-import * as PIXI from "pixi.js";
 import { App } from '../system/App';
 
 export class Diamond {
@@ -9,10 +8,11 @@ export class Diamond {
         App.app.ticker.add(this.update, this);
     }
 
+    // using isDistinct flag to create special diamonds
     createSprite(x, y) {
         if (this.isDistinct) {
             this.sprite = App.sprite("special-diamond");
-            this.sprite.width = 40; 
+            this.sprite.width = 60; 
             this.sprite.height = 30; 
 
         } else {

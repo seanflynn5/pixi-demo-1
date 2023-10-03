@@ -74,8 +74,6 @@ export class Platform {
         tile.y = row * tile.height;
     }
 
-
-    // 06
     move() {
         if (this.body) {
             Matter.Body.setPosition(this.body, {x: this.body.position.x + this.dx, y: this.body.position.y});

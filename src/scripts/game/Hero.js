@@ -14,7 +14,14 @@ export class Hero {
         this.maxJumps = App.config.hero.maxJumps;
         this.jumpIndex = 0;
         this.score = 0;
-        this.name = '';
+        this.nameText = new PIXI.Text('', {
+            fontFamily: "Verdana",
+            fontSize: 20, // Adjust the font size as needed
+            fill: "#FF6229", // Adjust the text color as needed
+        });
+        this.nameText.position.set(App.app.renderer.width - 10, 10);
+        this.nameText.anchor.set(1, 0); // Align to top-right
+        App.app.stage.addChild(this.nameText);
     }
 
     assignName() {
@@ -61,8 +68,10 @@ export class Hero {
         this.sprite.x = this.body.position.x - this.sprite.width / 2;
         this.sprite.y = this.body.position.y - this.sprite.height / 2;
 
+        this.nameText.text = `Current Player: ${this.name}`;
+
         // [14]
-        if (this.sprite.y > window.innerHeight) {
+        if (this.sprite.y > window.innerHeight || (this.sprite.x + this.sprite.width < 0)) {
             this.sprite.emit("die");
         }
         // [/14]
@@ -82,23 +91,24 @@ export class Hero {
         this.sprite.play();
     }
 
+    // Function that runs animation upon there being a new top scorer on the leaderboard 
     startFireworksAnimation() {
         const fireworks = [];
     
-        for (let i = 0; i < 1000; i++) {
+        for (let i = 0; i < 600; i++) {
             const firework = new PIXI.Graphics();
-            const randomColor = getRandomColor(); // Get a random color function
+            const randomColor = getRandomColor(); 
             firework.beginFill(randomColor);
-            firework.drawCircle(10, 10, 10);
+            firework.drawCircle(8, 8, 12);
             firework.endFill();
             firework.x = Math.random() * App.app.renderer.width;
-            firework.y = App.app.renderer.height;
+            firework.y = App.app.renderer.height + 100
             App.app.stage.addChild(firework);
-            fireworks.push({ firework, color: randomColor }); // Store both the firework and its color
+            fireworks.push({ firework, color: randomColor });
         }
     
-        const explosionDuration = 2000; // Duration of the explosion in milliseconds
-        const explosionHeight = 100;   // Height to which the fireworks explode
+        const explosionDuration = 2000;
+        const explosionHeight = 100; 
     
         fireworks.forEach(({ firework, color }) => {
             const targetY = firework.y - Math.random() * explosionHeight;

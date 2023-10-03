@@ -14,6 +14,7 @@ export class GameScene extends Scene {
         this.createHero();
         this.createPlatforms();
         this.setEvents();
+        // Displays leaderboard
         this.showLeaderboard();
         //[13]
         this.createUI();
@@ -59,7 +60,7 @@ export class GameScene extends Scene {
         this.container.on("pointerdown", () => {
             this.hero.startJump();
         });
-        // [14]
+        // Sets condition to check for new high score upon death
         this.hero.sprite.once("die", () => {
             Scores[this.hero.name] = this.hero.score;
             const sortedScores = Object.entries(Scores).sort(([, scoreA], [, scoreB]) => scoreB - scoreA); 
@@ -67,6 +68,7 @@ export class GameScene extends Scene {
                 this.hero.startFireworksAnimation();
                 this.hero.showNewHighScoreMessage();
             }
+            this.hero.nameText.text = '';
             App.scenes.start("Game");
         });
         // [/14]
