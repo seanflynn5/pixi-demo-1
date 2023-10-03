@@ -1,14 +1,26 @@
 import * as Matter from 'matter-js';
+import * as PIXI from "pixi.js";
 import { App } from '../system/App';
 
 export class Diamond {
     constructor(x, y) {
+        this.isDistinct = Math.random() < 0.1; // 10% chance of being distinct
         this.createSprite(x, y);
         App.app.ticker.add(this.update, this);
     }
 
     createSprite(x, y) {
-        this.sprite = App.sprite("diamond");
+        if (this.isDistinct) {
+            this.sprite = App.sprite("special-diamond");
+            this.sprite.width = 40; 
+            this.sprite.height = 30; 
+
+        } else {
+            this.sprite = App.sprite("diamond");
+            this.sprite.width = 30; 
+            this.sprite.height = 30; 
+        }
+
         this.sprite.x = x;
         this.sprite.y = y;
     }

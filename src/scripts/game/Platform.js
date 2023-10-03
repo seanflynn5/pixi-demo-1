@@ -43,6 +43,7 @@ export class Platform {
             diamond.createBody();
             this.diamonds.push(diamond);
     }
+
     // [/10]
 
     createBody() {

@@ -25,10 +25,13 @@ export class Hero {
     }
 
     collectDiamond(diamond) {
+        if (diamond.isDistinct) {
+            this.score = this.score + 9;
+            this.sprite.emit("score");
+            diamond.destroy();
+        }
         ++this.score;
-        //[13]
         this.sprite.emit("score");
-        //[/13]
         diamond.destroy();
     }
     //[/12]
@@ -75,28 +78,29 @@ export class Hero {
         this.sprite.y = App.config.hero.position.y;
         this.sprite.loop = true;
         this.sprite.animationSpeed = 0.1;
-        this.sprite.width = this.sprite.width - 20; // Reduced width of hero because he could be stuck in gaps between Platforms
+        this.sprite.width = this.sprite.width - 25; // Reduced width of hero because he could be stuck in gaps between Platforms
         this.sprite.play();
     }
 
     startFireworksAnimation() {
         const fireworks = [];
     
-        for (let i = 0; i < 40; i++) {
+        for (let i = 0; i < 1000; i++) {
             const firework = new PIXI.Graphics();
-            firework.beginFill(0xFF7F50);
+            const randomColor = getRandomColor(); // Get a random color function
+            firework.beginFill(randomColor);
             firework.drawCircle(10, 10, 10);
             firework.endFill();
             firework.x = Math.random() * App.app.renderer.width;
             firework.y = App.app.renderer.height;
             App.app.stage.addChild(firework);
-            fireworks.push(firework);
+            fireworks.push({ firework, color: randomColor }); // Store both the firework and its color
         }
     
         const explosionDuration = 2000; // Duration of the explosion in milliseconds
         const explosionHeight = 100;   // Height to which the fireworks explode
     
-        fireworks.forEach((firework) => {
+        fireworks.forEach(({ firework, color }) => {
             const targetY = firework.y - Math.random() * explosionHeight;
             const targetScale = Math.random() * 2 + 1;
     
@@ -125,6 +129,13 @@ export class Hero {
     
             setTimeout(animateFirework, Math.random() * explosionDuration);
         });
+    
+        // Function to get a random color
+        function getRandomColor() {
+            const colors = [0xFFA500, 0x008000, 0xFFFFFF]; 
+            const randomIndex = Math.floor(Math.random() * colors.length);
+            return colors[randomIndex];
+        }
     }
     
     showNewHighScoreMessage() {
@@ -134,6 +145,10 @@ export class Hero {
             fontSize: 44,
             fill: ["#FF7F50"],
             align: 'center',
+            dropShadow: true, 
+            dropShadowColor: "#FFFFFF", 
+            dropShadowBlur: 10, 
+            dropShadowDistance: 0, 
         });
 
         // Position the message text at the center of the window
@@ -146,9 +161,9 @@ export class Hero {
         App.app.stage.addChild(messageText);
 
         // Use GSAP for the fade-in and fade-out animation
-        const fadeDuration = 2; // Duration in seconds
-        const fadeInTime = fadeDuration * 0.2;
-        const fadeOutTime = fadeDuration * 0.8;
+        const fadeDuration = 4; // Duration in seconds
+        const fadeInTime = fadeDuration * 0.5;
+        const fadeOutTime = fadeDuration * 0.5;
 
         gsap.to(messageText, {
             alpha: 1,

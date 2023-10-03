@@ -9,6 +9,7 @@ export class Leaderboard {
         
         // Style for leaderboard entries
         const entryStyle = {
+            fontFamily: 'Verdana',
             fontSize: 18,
             fill: 0xFFFFFF,
         };
