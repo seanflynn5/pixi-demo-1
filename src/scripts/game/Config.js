@@ -43,8 +43,8 @@ export const Config = {
         jumpSpeed: 15,
         maxJumps: 2,
         position: {
-            x: 350,
-            y: 595
+            x: 200,
+            y: 100
         }
     },
     scenes: {

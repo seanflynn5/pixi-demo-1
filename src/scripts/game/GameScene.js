@@ -54,7 +54,6 @@ export class GameScene extends Scene {
         this.container.on("pointerdown", () => {
             this.hero.startJump();
         });
-
         // [14]
         this.hero.sprite.once("die", () => {
             App.scenes.start("Game");
@@ -68,13 +67,13 @@ export class GameScene extends Scene {
     }
 
     createPlatforms() {
-        this.platfroms = new Platforms();
-        this.container.addChild(this.platfroms.container);
+        this.platforms = new Platforms();
+        this.container.addChild(this.platforms.container);
     }
 
     update(dt) {
         this.bg.update(dt);
-        this.platfroms.update(dt);
+        this.platforms.update(dt);
     }
 
     destroy() {
@@ -82,7 +81,7 @@ export class GameScene extends Scene {
         App.app.ticker.remove(this.update, this);
         this.bg.destroy();
         this.hero.destroy();
-        this.platfroms.destroy();
+        this.platforms.destroy();
         this.labelScore.destroy();
     }
 }
