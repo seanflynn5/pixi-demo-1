@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import { App } from "../system/App";
-import Scores from "../system/Scores.json"; // Import the scoreboard JSON data
+import Scores from "../system/Scores.json"; 
 
 export class Leaderboard {
     constructor() {

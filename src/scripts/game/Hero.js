@@ -16,11 +16,11 @@ export class Hero {
         this.score = 0;
         this.nameText = new PIXI.Text('', {
             fontFamily: "Verdana",
-            fontSize: 20, // Adjust the font size as needed
-            fill: "#FF6229", // Adjust the text color as needed
+            fontSize: 20, 
+            fill: "#FF6229",
         });
         this.nameText.position.set(App.app.renderer.width - 10, 10);
-        this.nameText.anchor.set(1, 0); // Align to top-right
+        this.nameText.anchor.set(1, 0);
         App.app.stage.addChild(this.nameText);
     }
 
